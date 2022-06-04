@@ -31,11 +31,11 @@ set( PROJECT_DESCRIPTION "${EXTPKG_DESC}" CACHE PATH "Project description" FORCE
 #   Load some handy CMake modules
 #------------------------------------------------------------------------------
 
-if( NOT EXISTS "${CMAKE_SOURCE_DIR}/cmake/modules" )
-    message( FATAL_ERROR "CMake modules directory not found! ${CMAKE_SOURCE_DIR}/cmake/modules" )
+if( NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" )
+    message( FATAL_ERROR "CMake modules directory not found! ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" )
 else()
 
-    set( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules" )
+    set( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" )
 
     include( Vdump )
     include( Trace )
@@ -86,11 +86,11 @@ check_header( stdint.h )        # defines HAVE_STDINT_H
 #   Always generate the platform.h header
 #------------------------------------------------------------------------------
 
-if( NOT EXISTS ${CMAKE_SOURCE_DIR}/platform.h.in )
+if( NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/platform.h.in )
     message( FATAL_ERROR "Unable to find platform.h.in!" )
 else()
-    configure_file( ${CMAKE_SOURCE_DIR}/platform.h.in
-                    ${CMAKE_BINARY_DIR}/platform.h )
+    configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/platform.h.in
+                    ${CMAKE_CURRENT_BINARY_DIR}/platform.h )
 endif()
 
 
@@ -163,7 +163,7 @@ configure_file( "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
 
 #  Now simply define an uninstall target that will run the above script.
 
-add_custom_target( uninstall
+add_custom_target( ${EXTPKG_NAME}_uninstall
                    COMMAND ${CMAKE_COMMAND} -P
                    "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake" )
 

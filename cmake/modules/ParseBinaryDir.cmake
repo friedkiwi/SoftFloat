@@ -80,7 +80,9 @@ Remove the 'CMakeCache.txt' file and the entire 'CMakeFiles' directory and try a
 
     string( LENGTH ${CONFIG} _n )
     if( ${_n} LESS 1 )
-        message( FATAL_ERROR "Invalid Release/Debug build type! ${CONFIG}" )
+        message( WARNING "Invalid Release/Debug build type! ${CONFIG}" )
+        message( WARNING "Defaulting to Release_64" )
+        set( CONFIG "Release" )
     endif()
 
     #--------------------------------------------------------------------------
@@ -92,7 +94,9 @@ Remove the 'CMakeCache.txt' file and the entire 'CMakeFiles' directory and try a
     Capitalize_Word( ${CONFIG} CONFIG )
 
     if(( NOT CONFIG STREQUAL "Debug" ) AND (NOT CONFIG STREQUAL "Release" ))
-        message( FATAL_ERROR "Invalid Release/Debug build type! ${CONFIG}" )
+        message( WARNING "Invalid Release/Debug build type! ${CONFIG}" )
+        message( WARNING "Defaulting to Release_64" )
+        set( CONFIG "Release" )
     endif()
 
     #--------------------------------------------------------------------------
@@ -116,7 +120,7 @@ Remove the 'CMakeCache.txt' file and the entire 'CMakeFiles' directory and try a
 
     string( LENGTH ${_xxxxx} _n )
     if( ${_n} LESS 3 )
-        message( FATAL_ERROR "Invalid base package name! ${_xxxxx}" )
+        message( WARNING "Invalid base package name! ${_xxxxx}" )
     endif()
 
     math( EXPR _n "${_n} - 2" )     # (want the last two characters)
@@ -126,7 +130,10 @@ Remove the 'CMakeCache.txt' file and the entire 'CMakeFiles' directory and try a
 
     if( NOT BITNESS STREQUAL "32" AND
         NOT BITNESS STREQUAL "64" )
-        message( FATAL_ERROR "Invalid package architecture! ${BITNESS}" )
+        message( WARNING "Invalid package architecture! ${BITNESS}" )
+        message( WARNING "Defaulting to 64-bit" )
+        set( BITNESS "64" )
+        set( BASENAME ${EXTPKG_NAME} )
     endif()
 
     #--------------------------------------------------------------------------

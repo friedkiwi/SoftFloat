@@ -4,9 +4,9 @@
 
 include_directories( BEFORE
 
-  ${CMAKE_BINARY_DIR}
-  ${CMAKE_SOURCE_DIR}/source/8086-SSE
-  ${CMAKE_SOURCE_DIR}/source/include
+  ${CMAKE_CURRENT_BINARY_DIR}
+  ${CMAKE_CURRENT_SOURCE_DIR}/source/8086-SSE
+  ${CMAKE_CURRENT_SOURCE_DIR}/source/include
 
 )
 
